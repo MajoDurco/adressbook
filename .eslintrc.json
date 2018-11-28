@@ -1,0 +1,75 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "accessor-pairs": "warn",
+    "block-scoped-var": "warn",
+    "comma-spacing": "error",
+    "comma-style": "warn",
+    "consistent-return": "warn",
+    "eqeqeq": ["error", "smart"],
+    "func-call-spacing": "warn",
+    "global-require": "warn",
+    "indent": ["warn", 2],
+    "no-alert": "error",
+    "no-cond-assign": ["error", "always"],
+    "no-const-assign": "error",
+    "no-delete-var": "error",
+    "no-dupe-args": "error",
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-empty": ["error", {
+      "allowEmptyCatch": true
+    }],
+    "no-empty-character-class": "error",
+    "no-ex-assign": "error",
+    "no-extra-boolean-cast": "error",
+    "no-extra-semi": "error",
+    "no-func-assign": "error",
+    "no-label-var": "warn",
+    "no-lonely-if": "warn",
+    "no-mixed-operators": "warn",
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+    "no-multi-spaces": ["error", {
+      "exceptions": {
+        "Property": true,
+        "VariableDeclarator": true,
+        "ImportDeclaration": true
+      }
+    }],
+    "no-multi-str": "error",
+    "no-new": "error",
+    "no-obj-calls": "error",
+    "no-self-assign": "warn",
+    "no-shadow-restricted-names": "error",
+    "no-sparse-arrays": "warn",
+    "no-tabs": "warn",
+    "no-trailing-spaces": "warn",
+    "no-undef-init": "warn",
+    "no-undefined": "error",
+    "no-unreachable": "error",
+    "no-unused-vars": ["error", {
+      "args": "all"
+    }],
+    "no-use-before-define": ["error", {
+      "functions": false,
+      "classes": false
+    }],
+    "no-useless-call": "error",
+    "no-useless-concat": "error",
+    "no-useless-return": "error",
+    "require-yield": "error",
+    "use-isnan": "warn",
+    "vars-on-top": "warn",
+    "yoda": "warn"
+  }
+}
