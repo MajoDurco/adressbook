@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "start": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.7"
   }
 }
