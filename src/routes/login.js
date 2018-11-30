@@ -1,18 +1,18 @@
 const express = require('express')
 
-const loginRouter = express.Router()
-const mongo = require('../mongo')()
-const { userSchemas } = require('../schemas')
+const httpCodes = require('../constants/httpCodes')
 const validateSchema = require('../schemas/validate')
+const { userSchemas } = require('../schemas')
+const { signUpNewUser } = require('../services/users')
+
+const loginRouter = express.Router()
 
 loginRouter.post('/signup', async (req, res) => {
   try {
     const { email, password } = await validateSchema(req.body, userSchemas.signUpRequest)
-    const client = await mongo;
-    const db = client.db('adressbook')
-    const collection = db.collection('users')
-    const result = await collection.insertOne({ email, password })
-    res.send('success')
+    const response = await signUpNewUser({ email, password })
+    res.status(response.statusCode)
+    res.send(response.message)
   } catch (err) {
     res.status(err.statusCode)
     res.send(err.message)

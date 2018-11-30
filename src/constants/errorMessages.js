@@ -12,5 +12,11 @@ module.exports = {
 
     message: 'Your password needs to be at least 8 characters long and without special symbols',
     statusCode: httpCodes.BAD_REQUEST,
+  },
+  'ERROR_IN_CREATING_NEW_USER': {
+    type: 'ERROR_IN_CREATING_NEW_USER',
+
+    message: 'We were unable to create you a new account',
+    statusCode: httpCodes.INTERNAL_ERROR,
   }
 }
