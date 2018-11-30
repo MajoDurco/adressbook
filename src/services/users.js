@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 const errorMessages = require('../constants/errorMessages')
 const mongo = require('../mongo')()
 const successMessages = require('../constants/successMessages')
@@ -7,10 +9,15 @@ async function signUpNewUser(user) {
   try {
     const client = await mongo;
     const db = client.db('adressbook')
-    await createNewUser(db, user)
+    const salt = await bcrypt.genSalt()
+    const hash = await bcrypt.hash(user.password, salt)
+    await createNewUser(db, {
+      password: hash,
+      email: user.email,
+    })
     return successMessages.SIGN_UP_SUCCESS
   } catch (err) {
-    console.error('xxx', err)
+    console.error(err)
     return errorMessages.ERROR_IN_CREATING_NEW_USER
   }
 }
