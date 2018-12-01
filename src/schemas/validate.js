@@ -5,6 +5,6 @@ module.exports = (...args) => {
   return joi
     .validate(...args)
     .catch((err) => {
-      throw errorMessages[err.message]
+      throw errorMessages[err.message] || errorMessages.WRONG_REQUEST
     })
 }

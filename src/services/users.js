@@ -5,10 +5,8 @@ const mongo = require('../mongo')()
 const successMessages = require('../constants/successMessages')
 const { createNewUser } = require('../models/users')
 
-async function signUpNewUser(user) {
+async function signUpNewUser(db, user) {
   try {
-    const client = await mongo;
-    const db = client.db('adressbook')
     const salt = await bcrypt.genSalt()
     const hash = await bcrypt.hash(user.password, salt)
     await createNewUser(db, {

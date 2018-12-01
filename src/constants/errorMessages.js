@@ -18,5 +18,11 @@ module.exports = {
 
     message: 'We were unable to create you a new account',
     statusCode: httpCodes.INTERNAL_ERROR,
+  },
+  'WRONG_REQUEST': {
+    type: 'WRONG_REQUEST',
+
+    message: 'Your request is in wrong format',
+    statusCode: httpCodes.BAD_REQUEST,
   }
 }

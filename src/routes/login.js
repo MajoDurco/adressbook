@@ -4,13 +4,15 @@ const httpCodes = require('../constants/httpCodes')
 const validateSchema = require('../schemas/validate')
 const { userSchemas } = require('../schemas')
 const { signUpNewUser } = require('../services/users')
+const { getAdressBookDB } = require('../getDatabase')
 
 const loginRouter = express.Router()
 
 loginRouter.post('/signup', async (req, res) => {
   try {
     const { email, password } = await validateSchema(req.body, userSchemas.signUpRequest)
-    const response = await signUpNewUser({ email, password })
+    const db = await getAdressBookDB()
+    const response = await signUpNewUser(db, { email, password })
     res.status(response.statusCode)
     res.send(response.message)
   } catch (err) {

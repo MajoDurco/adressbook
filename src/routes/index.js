@@ -2,14 +2,13 @@ const express = require('express')
 
 const contacts = require('./contacts')
 const login = require('./login')
-const mongo = require('../mongo')()
+const { getAdressBookDB } = require('../getDatabase')
 
 const rootRouter = express.Router()
 
 rootRouter.get('/', async (req, res) => {
   try {
-    const client = await mongo;
-    const db = client.db('adressbook')
+    const db = await getAdressBookDB()
     const collection = db.collection('users')
     console.log(await collection.find().toArray())
     res.send('Home')
@@ -20,8 +19,7 @@ rootRouter.get('/', async (req, res) => {
 })
 
 rootRouter.post('/', async (req, res) => {
-  const client = await mongo;
-  const db = client.db('adressbook')
+  const db = await getAdressBookDB()
   const collection = db.collection('users')
   await collection.remove({})
   res.send('removed')

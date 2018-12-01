@@ -12,7 +12,7 @@ const signUpRequest = joi.object({
     .regex(/^[a-zA-Z0-9]{8,30}$/)
     .required()
     .error(new Error(errorMessages.INVALID_PASSWORD_FORMAT.type)),
-});
+}).required()
 
 module.exports = {
   signUpRequest,
