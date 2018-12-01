@@ -5,7 +5,7 @@ function generateToken(payload, expiration=jwtExpiration) {
   return jwt.sign(payload, jwtSecret, { expiresIn: expiration })
 }
 
-function verifyToken(token, jwtSecret) {
+function verifyToken(token) {
   return jwt.verify(token, jwtSecret)
 }
 

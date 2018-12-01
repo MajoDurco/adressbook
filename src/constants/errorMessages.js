@@ -36,5 +36,29 @@ module.exports = {
 
     message: 'This e-mail address is already in use',
     statusCode: httpCodes.CONFLICT,
-  }
+  },
+  'MISSING_TOKEN': {
+    type: 'MISSING_TOKEN',
+
+    message: 'Authorization token in request header is missing or has wrong format',
+    statusCode: httpCodes.BAD_REQUEST,
+  },
+  'AUTH_FAILED': {
+    type: 'AUTH_FAILED',
+
+    message: "You need to log in for this action",
+    statusCode: httpCodes.UNAUTHORIZED,
+  },
+  'SERVER_ERROR': {
+    type: 'SERVER_ERROR',
+
+    message: 'We were unable to process your request because of internal error',
+    statusCode: httpCodes.INTERNAL_ERROR,
+  },
+  'CONTACT_EXISTS': {
+    type: 'CONTACT_EXISTS',
+
+    message: 'This contact already exists',
+    statusCode: httpCodes.CONFLICT,
+  },
 }

@@ -3,6 +3,7 @@ const express = require('express')
 const validateSchema = require('../schemas/validate')
 const { generateToken } = require('../services/jwt')
 const { getAdressBookDB } = require('../getDatabase')
+const { sendErrorResponse } = require('../utils')
 const { signUpNewUser, signInUser } = require('../services/users')
 const { userSchemas } = require('../schemas')
 
@@ -19,12 +20,7 @@ loginRouter.post('/signup', async (req, res) => {
       status: response.statusCode
     })
   } catch (err) {
-    console.error(err)
-    res.status(err.statusCode)
-    res.send({
-      message: err.message,
-      status: err.statusCode
-    })
+    sendErrorResponse(res, err)
   }
 })
 
@@ -36,12 +32,7 @@ loginRouter.post('/signin', async (req, res) => {
     const token = generateToken({ email: user.email })
     res.send({ token })
   } catch (err) {
-    console.error(err)
-    res.status(err.statusCode)
-    res.send({
-      message: err.message,
-      status: err.statusCode
-    })
+    sendErrorResponse(res, err)
   }
 })
 
