@@ -10,7 +10,7 @@ app.use(morgan('tiny'))
 app.use(helmet())
 app.use(express.json())
 app.use('/', routes.rootRouter)
-app.use('/login', routes.login)
+app.use('/', routes.login)
 app.use('/contacts', routes.contacts)
 
 module.exports = app

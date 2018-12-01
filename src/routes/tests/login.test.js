@@ -10,7 +10,7 @@ const successMessages = require('../../constants/successMessages')
 const { getAdressBookDB } = require('../../getDatabase')
 jest.mock('../../getDatabase.js')
 
-describe('/login', () => {
+describe('Login', () => {
   let mongoServer
   let client
   let db
@@ -29,7 +29,7 @@ describe('/login', () => {
     it('Should fail because you are missing required fields', () => {
       const response = errorMessages.INVALID_EMAIL_FORMAT
       return request(app)
-        .post('/login/signup')
+        .post('/signup')
         .send({})
         .expect({
           message: response.message,
@@ -39,7 +39,7 @@ describe('/login', () => {
     it('Should fail because the email is not in right format', () => {
       const response = errorMessages.INVALID_EMAIL_FORMAT
       return request(app)
-        .post('/login/signup')
+        .post('/signup')
         .send({
           email: 'wrong email',
           password: 'xxx'
@@ -52,7 +52,7 @@ describe('/login', () => {
     it('Should fail because password is short', () => {
       const response = errorMessages.INVALID_PASSWORD_FORMAT
       return request(app)
-        .post('/login/signup')
+        .post('/signup')
         .send({
           email: 'a@a.com',
           password: 'xxx'
@@ -65,7 +65,7 @@ describe('/login', () => {
     it('Should fail because request has more data', () => {
       const response = errorMessages.WRONG_REQUEST
       return request(app)
-        .post('/login/signup')
+        .post('/signup')
         .send({
           email: 'a@a.com',
           password: 'xxxyyyzzz',
@@ -83,7 +83,7 @@ describe('/login', () => {
       })
       const response = errorMessages.EMAIL_IN_USE
       return request(app)
-        .post('/login/signup')
+        .post('/signup')
         .send({
           email: 'user@user.com',
           password: 'xxxyyyzzz',
@@ -96,7 +96,7 @@ describe('/login', () => {
     it('Should create new user', async () => {
       const response = successMessages.SIGN_UP_SUCCESS
       await request(app)
-        .post('/login/signup')
+        .post('/signup')
         .send({
           email: 'a@a.com',
           password: 'xxxyyyzzz',
@@ -116,7 +116,7 @@ describe('/login', () => {
     it('Should fail because the request is not in correct format', () => {
       const response = errorMessages.SIGN_IN_ERROR
       return request(app)
-        .post('/login/signin')
+        .post('/signin')
         .send({})
         .expect({
           message: response.message,
@@ -126,7 +126,7 @@ describe('/login', () => {
     it('Should fail because the user is not found', () => {
       const response = errorMessages.SIGN_IN_ERROR
       return request(app)
-        .post('/login/signin')
+        .post('/signin')
         .send({
           email: 'b@b.com',
           password: 'xxxyyyzzz',
@@ -144,7 +144,7 @@ describe('/login', () => {
       bcrypt.compare.mockImplementation(() => false)
       const response = errorMessages.SIGN_IN_ERROR
       return request(app)
-        .post('/login/signin')
+        .post('/signin')
         .send({
           email: 'c@c.com',
           password: 'wrong',
@@ -161,7 +161,7 @@ describe('/login', () => {
       })
       bcrypt.compare.mockImplementation(() => true)
       return request(app)
-        .post('/login/signin')
+        .post('/signin')
         .send({
           email: 'c@c.com',
           password: 'pass1',
