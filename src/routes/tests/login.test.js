@@ -79,4 +79,6 @@ describe('/login', () => {
       })
     })
   })
+  describe('/signin', () => {
+  })
 })

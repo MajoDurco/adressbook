@@ -14,6 +14,18 @@ const signUpRequest = joi.object({
     .error(new Error(errorMessages.INVALID_PASSWORD_FORMAT.type)),
 }).required()
 
+const signInRequest = joi.object({
+  email: joi
+    .string()
+    .required()
+    .error(new Error(errorMessages.SIGN_IN_ERROR.type)),
+  password: joi
+    .string()
+    .required()
+    .error(new Error(errorMessages.SIGN_IN_ERROR.type)),
+}).required()
+
 module.exports = {
+  signInRequest,
   signUpRequest,
 }

@@ -7,6 +7,12 @@ function createNewUser(db, user) {
   })
 }
 
+function findUserByEmail(db, email) {
+  const collection = db.collection('users')
+  return collection.findOne({ email })
+}
+
 module.exports = {
   createNewUser,
+  findUserByEmail
 }

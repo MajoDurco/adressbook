@@ -24,5 +24,17 @@ module.exports = {
 
     message: 'Your request is in wrong format',
     statusCode: httpCodes.BAD_REQUEST,
+  },
+  'SIGN_IN_ERROR': {
+    type: 'SIGN_IN_ERROR',
+
+    message: 'Your email or password is not correct',
+    statusCode: httpCodes.UNAUTHORIZED,
+  },
+  'EMAIL_IN_USE': {
+    type: 'EMAIL_IN_USE',
+
+    message: 'This e-mail address is already in use',
+    statusCode: httpCodes.CONFLICT,
   }
 }
