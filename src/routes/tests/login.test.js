@@ -31,7 +31,10 @@ describe('/login', () => {
       return request(app)
         .post('/login/signup')
         .send({})
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should fail because the email is not in right format', () => {
       const response = errorMessages.INVALID_EMAIL_FORMAT
@@ -41,7 +44,10 @@ describe('/login', () => {
           email: 'wrong email',
           password: 'xxx'
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should fail because password is short', () => {
       const response = errorMessages.INVALID_PASSWORD_FORMAT
@@ -51,7 +57,10 @@ describe('/login', () => {
           email: 'a@a.com',
           password: 'xxx'
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should fail because request has more data', () => {
       const response = errorMessages.WRONG_REQUEST
@@ -62,7 +71,10 @@ describe('/login', () => {
           password: 'xxxyyyzzz',
           foo: 'boo'
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should fail because the email is already in use', () => {
       db.collection('users').insertOne({
@@ -76,7 +88,10 @@ describe('/login', () => {
           email: 'user@user.com',
           password: 'xxxyyyzzz',
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should create new user', async () => {
       const response = successMessages.SIGN_UP_SUCCESS
@@ -86,7 +101,10 @@ describe('/login', () => {
           email: 'a@a.com',
           password: 'xxxyyyzzz',
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
       const users = await db.collection('users').find({ email: 'a@a.com'}).toArray()
       expect(users[0]).toMatchObject({
         email: 'a@a.com',
@@ -100,7 +118,10 @@ describe('/login', () => {
       return request(app)
         .post('/login/signin')
         .send({})
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should fail because the user is not found', () => {
       const response = errorMessages.SIGN_IN_ERROR
@@ -110,7 +131,10 @@ describe('/login', () => {
           email: 'b@b.com',
           password: 'xxxyyyzzz',
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should fail because password is not correct', () => {
       db.collection('users').insertOne({
@@ -125,7 +149,10 @@ describe('/login', () => {
           email: 'c@c.com',
           password: 'wrong',
         })
-        .expect(response.statusCode, response.message)
+        .expect({
+          message: response.message,
+          status: response.statusCode,
+        })
     })
     it('Should log in the user', () => {
       db.collection('users').insertOne({

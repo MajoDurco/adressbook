@@ -14,11 +14,17 @@ loginRouter.post('/signup', async (req, res) => {
     const db = await getAdressBookDB()
     const response = await signUpNewUser(db, { email, password })
     res.status(response.statusCode)
-    res.send(response.message)
+    res.send({
+      message: response.message,
+      status: response.statusCode
+    })
   } catch (err) {
     console.error(err)
     res.status(err.statusCode)
-    res.send(err.message)
+    res.send({
+      message: err.message,
+      status: err.statusCode
+    })
   }
 })
 
@@ -28,11 +34,14 @@ loginRouter.post('/signin', async (req, res) => {
     const db = await getAdressBookDB()
     const user = await signInUser(db, { email, password })
     const token = generateToken({ email: user.email })
-    res.send(token)
+    res.send({ token })
   } catch (err) {
     console.error(err)
     res.status(err.statusCode)
-    res.send(err.message)
+    res.send({
+      message: err.message,
+      status: err.statusCode
+    })
   }
 })
 
