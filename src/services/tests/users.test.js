@@ -6,12 +6,12 @@ const errorMessages = require('../../constants/errorMessages')
 const successMessages = require('../../constants/successMessages')
 const { signUpNewUser } = require('../users')
 
-
 describe('User service', () => {
   let mongoServer
   let client
   let db
   beforeAll(async () => {
+    console.log('fjdkfjalkdj')
     mongoServer = new MongoMemoryServer()
     const mongoUri = await mongoServer.getConnectionString()
     client = await MongoClient.connect(mongoUri)
@@ -55,4 +55,5 @@ describe('User service', () => {
     })
     expect(response).toEqual(errorMessages.ERROR_IN_CREATING_NEW_USER)
   })
+  // TODO 'signInUser'
 })

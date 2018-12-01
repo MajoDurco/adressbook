@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 
 const errorMessages = require('../constants/errorMessages')
-const mongo = require('../mongo')()
 const successMessages = require('../constants/successMessages')
 const { createNewUser, findUserByEmail } = require('../models/users')
 
@@ -22,7 +21,7 @@ async function signUpNewUser(db, user) {
   }
 }
 
-async function getUser(db, user) {
+async function signInUser(db, user) {
   try {
     const userFromDB = await findUserByEmail(db, user.email)
     if (!userFromDB) throw errorMessages.SIGN_IN_ERROR
@@ -38,6 +37,6 @@ async function getUser(db, user) {
 }
 
 module.exports = {
-  getUser,
+  signInUser,
   signUpNewUser,
 }

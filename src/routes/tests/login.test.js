@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const request = require('supertest');
 const { MongoClient } = require('mongodb')
 const { MongoMemoryServer } = require('mongodb-memory-server')
@@ -13,15 +14,16 @@ describe('/login', () => {
   let mongoServer
   let client
   let db
-  beforeEach(async () => {
+  beforeAll(async () => {
     mongoServer = new MongoMemoryServer()
     const mongoUri = await mongoServer.getConnectionString()
     client = await MongoClient.connect(mongoUri)
     db = client.db('adressbook')
     getAdressBookDB.mockResolvedValue(db)
   })
-  afterEach(() => {
+  afterAll(() => {
     client.close()
+    mongoServer.stop()
   })
   describe('/signup', () => {
     it('Should fail because you are missing required fields', () => {
@@ -62,6 +64,20 @@ describe('/login', () => {
         })
         .expect(response.statusCode, response.message)
     })
+    it('Should fail because the email is already in use', () => {
+      db.collection('users').insertOne({
+        email: 'user@user.com',
+        password: 'pass1',
+      })
+      const response = errorMessages.EMAIL_IN_USE
+      return request(app)
+        .post('/login/signup')
+        .send({
+          email: 'user@user.com',
+          password: 'xxxyyyzzz',
+        })
+        .expect(response.statusCode, response.message)
+    })
     it('Should create new user', async () => {
       const response = successMessages.SIGN_UP_SUCCESS
       await request(app)
@@ -71,8 +87,7 @@ describe('/login', () => {
           password: 'xxxyyyzzz',
         })
         .expect(response.statusCode, response.message)
-      const users = await db.collection('users').find().toArray()
-      expect(users).toHaveLength(1)
+      const users = await db.collection('users').find({ email: 'a@a.com'}).toArray()
       expect(users[0]).toMatchObject({
         email: 'a@a.com',
         password: 'hashedPassword',
@@ -80,5 +95,51 @@ describe('/login', () => {
     })
   })
   describe('/signin', () => {
+    it('Should fail because the request is not in correct format', () => {
+      const response = errorMessages.SIGN_IN_ERROR
+      return request(app)
+        .post('/login/signin')
+        .send({})
+        .expect(response.statusCode, response.message)
+    })
+    it('Should fail because the user is not found', () => {
+      const response = errorMessages.SIGN_IN_ERROR
+      return request(app)
+        .post('/login/signin')
+        .send({
+          email: 'b@b.com',
+          password: 'xxxyyyzzz',
+        })
+        .expect(response.statusCode, response.message)
+    })
+    it('Should fail because password is not correct', () => {
+      db.collection('users').insertOne({
+        email: 'c@c.com',
+        password: 'pass1',
+      })
+      bcrypt.compare.mockImplementation(() => false)
+      const response = errorMessages.SIGN_IN_ERROR
+      return request(app)
+        .post('/login/signin')
+        .send({
+          email: 'c@c.com',
+          password: 'wrong',
+        })
+        .expect(response.statusCode, response.message)
+    })
+    it('Should log in the user', () => {
+      db.collection('users').insertOne({
+        email: 'c@c.com',
+        password: 'pass1',
+      })
+      bcrypt.compare.mockImplementation(() => true)
+      return request(app)
+        .post('/login/signin')
+        .send({
+          email: 'c@c.com',
+          password: 'pass1',
+        })
+        .expect(200)
+    })
   })
 })

@@ -6,7 +6,8 @@ const { getAdressBookDB } = require('../getDatabase')
 
 const rootRouter = express.Router()
 
-rootRouter.get('/', async (req, res) => {
+// eslint-disable-next-line
+rootRouter.get('/', async (_, res) => {
   try {
     const db = await getAdressBookDB()
     const collection = db.collection('users')
@@ -18,7 +19,8 @@ rootRouter.get('/', async (req, res) => {
   }
 })
 
-rootRouter.post('/', async (req, res) => {
+// eslint-disable-next-line
+rootRouter.post('/', async (_, res) => {
   const db = await getAdressBookDB()
   const collection = db.collection('users')
   await collection.remove({})

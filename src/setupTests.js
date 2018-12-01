@@ -1,4 +1,5 @@
 jest.mock('bcrypt', () => ({
+  compare: jest.fn(() => true),
   genSalt: jest.fn(),
-  hash: jest.fn(() => 'hashedPassword')
+  hash: jest.fn(() => 'hashedPassword'),
 }))
