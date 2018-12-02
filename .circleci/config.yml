@@ -52,6 +52,12 @@ jobs:
       - checkout
       - *restore_dependencies
       - run: yarn lint
+  deploy:
+    <<: *job_setup
+    steps:
+      - checkout
+      - *restore_dependencies
+      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git production
 
 workflows:
   version: 2
@@ -64,3 +70,11 @@ workflows:
       - lint:
           requires:
             - install
+      - deploy:
+          requires:
+            - test
+            - lint
+          filters:
+            branches:
+              only: production
+
