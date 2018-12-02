@@ -11,7 +11,6 @@ describe('User service', () => {
   let client
   let db
   beforeAll(async () => {
-    console.log('fjdkfjalkdj')
     mongoServer = new MongoMemoryServer()
     const mongoUri = await mongoServer.getConnectionString()
     client = await MongoClient.connect(mongoUri)

@@ -15,7 +15,7 @@ rootRouter.get('/', async (_, res) => {
       https://github.com/MajoDurco/adressbook
     `)
   } catch (err) {
-    console.log(err)
+    console.error(err)
     res.status(httpCodes.INTERNAL_ERROR)
     res.send('Internal server error!')
   }
