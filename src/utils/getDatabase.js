@@ -1,4 +1,4 @@
-const mongo = require('./mongo')()
+const { mongo } = require('./mongo')
 
 async function getDatabase(dbName) {
   const client = await mongo;
