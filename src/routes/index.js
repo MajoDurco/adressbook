@@ -2,7 +2,7 @@ const express = require('express')
 
 const contacts = require('./contacts')
 const login = require('./login')
-const { getAdressBookDB } = require('../getDatabase')
+const { getAdressBookDB } = require('../utils/getDatabase')
 
 const rootRouter = express.Router()
 

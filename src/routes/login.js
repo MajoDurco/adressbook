@@ -2,7 +2,7 @@ const express = require('express')
 
 const validateSchema = require('../schemas/validate')
 const { generateToken } = require('../services/jwt')
-const { getAdressBookDB } = require('../getDatabase')
+const { getAdressBookDB } = require('../utils/getDatabase')
 const { sendErrorResponse } = require('../utils')
 const { signUpNewUser, signInUser } = require('../services/users')
 const { userSchemas } = require('../schemas')

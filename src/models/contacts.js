@@ -1,4 +1,4 @@
-const { firestore } = require('../firebase')
+const { firestore } = require('../utils/firebase')
 
 function getUserDocument(userEmail) {
   return firestore.collection('users').doc(userEmail)

@@ -7,8 +7,8 @@ const app = require('../../../app');
 const errorMessages = require('../../constants/errorMessages')
 const successMessages = require('../../constants/successMessages')
 
-const { getAdressBookDB } = require('../../getDatabase')
-jest.mock('../../getDatabase.js')
+const { getAdressBookDB } = require('../../utils/getDatabase')
+jest.mock('../../utils/getDatabase.js')
 
 describe('Login', () => {
   let mongoServer
