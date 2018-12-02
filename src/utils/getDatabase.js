@@ -7,5 +7,5 @@ async function getDatabase(dbName) {
 
 module.exports = {
   getDatabase,
-  getAdressBookDB: () => getDatabase('adressbook')
+  getAddressBookDB: () => getDatabase('addressbook')
 }

@@ -7,7 +7,7 @@ const app = require('../../../app');
 const errorMessages = require('../../constants/errorMessages')
 const successMessages = require('../../constants/successMessages')
 
-const { getAdressBookDB } = require('../../utils/getDatabase')
+const { getAddressBookDB } = require('../../utils/getDatabase')
 jest.mock('../../utils/getDatabase.js')
 
 describe('Login', () => {
@@ -18,8 +18,8 @@ describe('Login', () => {
     mongoServer = new MongoMemoryServer()
     const mongoUri = await mongoServer.getConnectionString()
     client = await MongoClient.connect(mongoUri)
-    db = client.db('adressbook')
-    getAdressBookDB.mockResolvedValue(db)
+    db = client.db('addressbook')
+    getAddressBookDB.mockResolvedValue(db)
   })
   afterAll(() => {
     client.close()

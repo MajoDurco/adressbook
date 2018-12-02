@@ -2,7 +2,7 @@ const express = require('express')
 
 const validateSchema = require('../schemas/validate')
 const { generateToken } = require('../services/jwt')
-const { getAdressBookDB } = require('../utils/getDatabase')
+const { getAddressBookDB } = require('../utils/getDatabase')
 const { sendErrorResponse } = require('../utils')
 const { signUpNewUser, signInUser } = require('../services/users')
 const { userSchemas } = require('../schemas')
@@ -12,7 +12,7 @@ const loginRouter = express.Router()
 loginRouter.post('/signup', async (req, res) => {
   try {
     const { email, password } = await validateSchema(req.body, userSchemas.signUpRequest)
-    const db = await getAdressBookDB()
+    const db = await getAddressBookDB()
     const response = await signUpNewUser(db, { email, password })
     res.status(response.statusCode)
     res.send({
@@ -27,7 +27,7 @@ loginRouter.post('/signup', async (req, res) => {
 loginRouter.post('/signin', async (req, res) => {
   try {
     const { email, password } = await validateSchema(req.body, userSchemas.signInRequest)
-    const db = await getAdressBookDB()
+    const db = await getAddressBookDB()
     const user = await signInUser(db, { email, password })
     const token = generateToken({ email: user.email })
     res.send({ token })

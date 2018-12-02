@@ -6,7 +6,7 @@ refs:
       - image: circleci/node:10
 
   work_dir: &work_dir
-    working_directory: '~/adressbook'
+    working_directory: '~/addressbook'
 
   yarn_key: &yarn_key
     v1-yarn-lock-{{ checksum "yarn.lock" }}

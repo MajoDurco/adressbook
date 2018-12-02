@@ -1,5 +1,5 @@
 {
-  "name": "adressbook",
+  "name": "addressbook",
   "version": "1.0.0",
   "description": "Simple address book",
   "main": "index.js",

@@ -19,7 +19,6 @@ async function getUserContacts(userEmail) {
 
 async function findUserContact(userEmail, requestContact) {
   const contacts = await getUserContacts(userEmail)
-  console.log(contacts)
   return contacts.find((contact) => contact.email === requestContact.email)
 }
 
