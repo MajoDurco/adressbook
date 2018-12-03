@@ -9,7 +9,7 @@ refs:
     working_directory: '~/addressbook'
 
   yarn_key: &yarn_key
-    v1-yarn-lock-{{ checksum "yarn.lock" }}
+    v2-yarn-lock-{{ checksum "yarn.lock" }}
 
   save_dependencies: &save_dependencies
     save_cache:

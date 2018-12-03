@@ -54,5 +54,4 @@ describe('User service', () => {
     })
     expect(response).toEqual(errorMessages.ERROR_IN_CREATING_NEW_USER)
   })
-  // TODO 'signInUser'
 })
